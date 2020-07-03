@@ -1,0 +1,19 @@
+{
+  "name": "dutiesmadeeasy",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w dutiesmadeeasy"
+  },
+  "author": "VaibhavGole",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron-rebuild": "^1.11.0"
+  },
+  "dependencies": {
+    "electron": "^9.0.0",
+    "osenv": "^0.1.5"
+  }
+}
