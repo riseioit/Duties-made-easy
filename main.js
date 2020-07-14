@@ -3,10 +3,8 @@ const { BrowserWindow, app} = electron;
 const url = require('url');
 const path = require('path');
 const { exec, execSync } = require('child_process');
-const remote = electron.remote;
 const { dialog, shell, ipcMain } = require('electron');
 let mainWindow = null;
-let pythonCheck = null;
 let response = null;
 
 process.env.NODE_ENV = 'production';
