@@ -1,0 +1,31 @@
+{
+  "name": "dutiesmadeeasy",
+  "version": "1.0.0",
+  "description": "\"This is the demo app for testing\"",
+  "homepage": "https://github.com/Vaibhavgole/demoApp",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w dutiesmadeeasy",
+    "build:linux": "electron-builder --linux --dir",
+    "dist:linux": "electron-builder --linux"
+  },
+  "author": "Vaibhav Gole <vaibhavgoley3@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.0"
+  },
+  "dependencies": {
+    "osenv": "^0.1.5"
+  },
+  "build": {
+    "appId": "com.my.app.id",
+    "linux": {
+      "category": "Utility",
+      "maintainer": "Vaibhav Gole <vaibhavgoley3@gmail.com>",
+      "target": [
+        "deb"
+      ]
+    }
+  }
+}

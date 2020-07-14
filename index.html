@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Courgette&family=Marck+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Duties Made Easy</h1>
+    </div>
+    <button type="button" class="button upload" id='upload1'><span>UPLOAD FILE</span></button>
+    <button type="button" class="button download" id = 'download1'><span>DOWNLOAD</span></button>
+</body>
+<script>
+	`use strict`
+
+const  electron = require('electron');
+const remote = require('electron').remote; 
+const path = require('path'); 
+const osenv = require('osenv');
+const { ipcRenderer } = require('electron');
+// Importing dialog module using remote 
+const dialog = electron.remote.dialog; 
+
+var uploadFile = document.getElementById('upload1'); 
+// Defining a Global file path Variable to store 
+// user-selected file 
+global.filepath = undefined; 
+uploadFile.addEventListener('click', () => { 
+	const win = remote.getCurrentWindow();
+// If the platform is 'win32' or 'Linux' 
+	if (process.platform !== 'darwin') { 
+		// Resolves to a Promise<Object> 
+		dialog.showOpenDialog(win, { 
+			title: 'Select the File to be uploaded', 
+			defaultPath: osenv.home(), 
+			buttonLabel: 'Upload', 
+			// Restricting the user to only Text Files. 
+			filters: [ 
+				{ 
+					name: 'Excel Files', 
+					extensions: ['xlsx'] 
+				}, ], 
+			// Specifying the File Selector Property 
+			properties: ['openFile'] 
+		}).then(file => { 
+			// Stating whether dialog operation was 
+			// cancelled or not. 
+			console.log(file.canceled); 
+			if (!file.canceled) { 
+			// Updating the GLOBAL filepath variable 
+			// to user-selected file. 
+			global.filepath = file.filePaths[0].toString(); 
+			console.log(global.filepath); 
+			} 
+		}).catch(err => { 
+			console.log(err) 
+		}); 
+	} 
+	else { 
+		// If the platform is 'darwin' (macOS) 
+		dialog.showOpenDialog(win, { 
+			title: 'Select the File to be uploaded', 
+			defaultPath: __dirname, 
+			buttonLabel: 'Upload', 
+			filters: [ 
+				{ 
+					name: 'Excel File', 
+					extensions: ['xlsx'] 
+				}, ], 
+			// Specifying the File Selector and Directory 
+			// Selector Property In macOS 
+			properties: ['openFile', 'openDirectory'] 
+		}).then(file => { 
+			console.log(file.canceled); 
+			if (!file.canceled) { 
+			global.filepath = file.filePaths[0].toString(); 
+			console.log(global.filepath); 
+			} 
+		}).catch(err => { 
+			console.log(err) 
+		}); 
+	} 
+});
+
+var downFile = document.getElementById('download1');
+downFile.addEventListener('click', () => {
+	if (global.filepath !== undefined)
+	{
+		ipcRenderer.send('download-file', global.filepath);
+		ipcRenderer.on('file-downloaded', (event, arg) => {
+			confirm(arg);
+		})
+	}
+	else {
+		confirm('No file selected');
+	}
+	
+});
+
+</script>
+</html>
+
+
+<!--
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duties Made Easy</title>
+    <link rel="stylesheet" href="frontPage.css">
+</head>
+<body>
+    <h1>Duties Made Easy</h1>
+    <button type="button" onclick="runPythonCode()">Run the code</button>
+    <input type="button" id="btn_readfile" value="Select File" />
+
+
+     
+</body>
+
+
+<script>
+    const electron = require('electron');
+    const { spawn} = require("child_process");
+    
+
+    function runPythonCode() {
+        const ls = spawn('python', ['test.py']);
+        ls.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+        return true;
+        });
+
+        ls.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+        });
+
+        ls.on('close', (code) => {
+        console.log(`process exited with code ${code}`);
+        });
+    }
+
+    //File System Module
+    const fs= require('fs');
+    //Dialog Modules
+    const {dialog}= require('electron').remote;
+    document.getElementById("btn_readfile").addEventListener("click", () => {
+
+
+        dialog.showOpenDialog((fileNames) => {
+            if(fileNames === undefined) {
+                console.log("No file selected");
+                return;
+            }
+            fs.readFile(fileNames[0], 'utf-8', (err, data) => {
+                if(err) {
+                    console.log("Cannot read file");
+                    return;
+                }
+
+                console.log("The content of the file is : ");
+                console.log(data); 
+            });
+        });
+    }, false);
+
+
+    
+</script>
+
+</html>
+
+
+-->

@@ -1,0 +1,64 @@
+body {
+    background-color: red; /* For browsers that do not support gradients */
+    background-image: url("/home/vaibhavgole/workspace/Building_Desktop_App/assets/night-sky-stars.jpg");
+    
+  
+    font-family: 'Dancing Script', 'Marck Script', cursive;
+  
+    font-size: 22px;
+    background-repeat: repeat-x;
+    enable-background: new;
+
+
+}
+
+.container {
+    text-align: center;
+    margin: 5vw auto 0 auto;
+    width: 70%;
+    padding: 10px;
+    font-size: 3em;
+}
+.upload {
+    border-color: #2196f3;
+    color: dodgerblue;
+    margin: 0 auto 0 30vw;
+    padding: 15px 30px;
+    border-radius: 7px;
+    box-shadow: 5px;
+    display: inline-block;
+}
+.download {
+    border-color: #2196f3;
+    color: dodgerblue;
+    margin: 0 auto 0 15vw;
+    padding: 15px 30px;
+    border-radius: 7px;
+    box-shadow: 5px;
+    display: inline-block;
+
+}
+.button {
+    border-radius: 4px;
+    background-color: rgb(250, 240, 240);
+    border: none;
+    color: red;
+    text-align: center;
+    font-size: 16px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 17px 30px;
+    border-radius: 7px;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.button:hover, .button:focus, .button:active{
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.05);
+    color: black;
+}
