@@ -13,7 +13,7 @@
   "author": "Vaibhav Gole <vaibhavgoley3@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.0.0"
+    "electron": "^9.3.0"
   },
   "dependencies": {
     "osenv": "^0.1.5"
